@@ -2,7 +2,8 @@ import { Component } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
-import { fetchImages} from 'shared/services/posts-api';
+import { fetchImages } from 'shared/services/posts-api';
+import Button from 'shared/components/Button';
 
 import styles from '../SearchImages/SearchImages.module.css';
 
@@ -37,7 +38,11 @@ class SearchImages extends Component {
 
   searchImages = ({ search }) => {
     this.setState({ search, items:[], page:1 });
-  };
+    };
+    
+     loadMore = ()=> {
+        this.setState(({page}) => ({page: page + 1}))
+    }
 
   render() {
     const { items, loading, error } = this.state;
@@ -48,7 +53,8 @@ class SearchImages extends Component {
         <Searchbar onSubmit={searchImages} />
         <ImageGallery  items={items} />
         {loading && <p>...Loading...but you must CHANGE this component</p>}
-        {error && <p className={styles.errorMessage}>{error}</p>}
+            {error && <p className={styles.errorMessage}>{error}</p>}
+            {Boolean(items.length) && <Button loadmore={this.loadMore } />}
       </>
     );
   }
