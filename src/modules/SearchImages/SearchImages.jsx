@@ -12,7 +12,7 @@ class SearchImages extends Component {
     search: '',
     items: [],
     loading: false,
-    error: null,
+    err: null,
     page: 1,
   };
 
@@ -27,7 +27,7 @@ class SearchImages extends Component {
     try {
       this.setState({ loading: true });
       const { search, page } = this.state;
-      const {hits} = await fetchImages(search, page);
+      const { hits } = await fetchImages(search, page);
       this.setState(({ items }) => ({ items: [...items, ...hits] }));
     } catch (err) {
       this.setState({ err: err.errorMessage });
@@ -37,24 +37,28 @@ class SearchImages extends Component {
   }
 
   searchImages = ({ search }) => {
-    this.setState({ search, items:[], page:1 });
-    };
-    
-     loadMore = ()=> {
-        this.setState(({page}) => ({page: page + 1}))
-    }
+    this.setState({ search, items: [], page: 1 });
+  };
+
+  loadMore = () => {
+    this.setState(({ page }) => ({ page: page + 1 }));
+  };
 
   render() {
-    const { items, loading, error } = this.state;
-    const { searchImages } = this;
+    const { items, loading, err } = this.state;
+      const { searchImages, loadMore } = this;
+      
+        const isImages = Boolean(items.length);
 
     return (
       <>
         <Searchbar onSubmit={searchImages} />
-        <ImageGallery  items={items} />
+        <ImageGallery items={items} />
         {loading && <p>...Loading...but you must CHANGE this component</p>}
-            {error && <p className={styles.errorMessage}>{error}</p>}
-            {Boolean(items.length) && <Button loadmore={this.loadMore } />}
+        {err && <p className={styles.errorMessage}>{err}</p>}
+        {isImages && (
+          <Button onLoadMore={loadMore} text={'Load more'} />
+        )}
       </>
     );
   }

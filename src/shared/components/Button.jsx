@@ -1,9 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import styles from '../components/Button.module.css'
+import styles from '../components/Button.module.css';
 
-const Button = ({loadMore}) => {
-    <button onClick={loadMore} type="button" className={styles.load_more}>Load more</button>
-}
+const Button = ({ onLoadMore, text }) => {
+  return (
+    <button
+      onClick={() => onLoadMore()}
+      type="button"
+      className={styles.load_more}
+    >
+      {text}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

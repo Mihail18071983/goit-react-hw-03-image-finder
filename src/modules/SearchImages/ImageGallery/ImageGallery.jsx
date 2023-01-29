@@ -2,6 +2,7 @@ import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 import styles from '../ImageGallery/ImageGallery.module.css';
 
+
 const ImageGallery = ({ items }) => {
   return (
     <ul className={styles.ImageGallery}>
