@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../components/Button.module.css';
+import styles from '../Button/Button.module.css';
 
 const Button = ({ onLoadMore, text }) => {
   return (
