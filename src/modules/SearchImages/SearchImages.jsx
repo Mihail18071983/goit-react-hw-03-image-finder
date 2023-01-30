@@ -18,7 +18,7 @@ class SearchImages extends Component {
     page: 1,
     showModal: false,
     total: 0,
-    imgDetails: '',
+    imgDetails: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -52,10 +52,10 @@ class SearchImages extends Component {
     this.setState(({ page }) => ({ page: page + 1 }));
   };
 
-  openModal = largeImageURL => {
+  openModal = ( largeImageURL, tags ) => {
     this.setState({
       showModal: true,
-      imgDetails: largeImageURL,
+      imgDetails: { largeImageURL, tags, }
     });
   };
 
@@ -67,14 +67,14 @@ class SearchImages extends Component {
   };
 
   render() {
-    const { items, loading, err, total, page, showModal, imgDetails, tags } =
+    const { items, loading, err, total, page, showModal, imgDetails} =
       this.state;
     const { searchImages, loadMore, closeModal, openModal } = this;
     const isImages = Boolean(items.length);
     const totalPage = Math.ceil(total / 12);
 
     return (
-      <>
+      <div className={styles.search_images}>
         <Searchbar onSubmit={searchImages} />
         <ImageGallery items={items} onClick={openModal} />
         {loading && <Loader />}
@@ -84,10 +84,10 @@ class SearchImages extends Component {
         )}
         {showModal && (
           <Modal close={closeModal}>
-            <img src={imgDetails} alt={tags} />
+            <img src={imgDetails.largeImageURL} alt={imgDetails.tags} />
           </Modal>
         )}
-      </>
+      </div>
     );
   }
 }

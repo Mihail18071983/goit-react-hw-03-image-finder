@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../Modal/Modal.module.css';
 
+
 const modalRoot = document.querySelector('#modal-root');
 
 class Modal extends Component {
@@ -26,9 +27,9 @@ class Modal extends Component {
     return createPortal(
       <div className={styles.Overlay} onClick={closeModal}>
         <div className={styles.Modal}>
-          <span className={styles.close} onClick={close}>
-            X
-          </span>
+          <button type='button' className={styles.close} onClick={close}>
+          X
+          </button>
           {children}
         </div>
       </div>,
@@ -38,3 +39,4 @@ class Modal extends Component {
 }
 
 export default Modal;
+

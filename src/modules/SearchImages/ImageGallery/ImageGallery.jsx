@@ -6,12 +6,13 @@ import styles from '../ImageGallery/ImageGallery.module.css';
 const ImageGallery = ({ items, onClick }) => {
   return (
     <ul className={styles.ImageGallery}>
-      {items.map(({ id, webformatURL, largeImageURL }) => (
+      {items.map(({ id, webformatURL, largeImageURL, tags }) => (
         <ImageGalleryItem
           onClick={onClick}
           key={id}
           webformatURL={webformatURL}
-          largeImageURL={largeImageURL }
+          largeImageURL={largeImageURL}
+          tags={tags}
         />
       ))}
     </ul>
