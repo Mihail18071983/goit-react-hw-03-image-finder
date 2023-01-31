@@ -10,8 +10,6 @@ import { toast } from 'react-toastify';
 
 import styles from '../SearchImages/SearchImages.module.css';
 
-
-
 class SearchImages extends Component {
   state = {
     search: '',
@@ -53,8 +51,7 @@ class SearchImages extends Component {
   searchImages = ({ search }) => {
     if (search !== this.state.search) {
       this.setState({ search, items: [], page: 1 });
-    }
-    else toast('you have already entered this query!')
+    } else toast('you have already entered this query!');
   };
 
   loadMore = () => {
@@ -76,8 +73,7 @@ class SearchImages extends Component {
   };
 
   render() {
-
-    const body=document.querySelector('body')
+    const body = document.querySelector('body');
     const { items, loading, err, total, page, showModal, imgDetails } =
       this.state;
     const { searchImages, loadMore, closeModal, openModal } = this;
@@ -86,17 +82,21 @@ class SearchImages extends Component {
 
     return (
       <div className={styles.search_images}>
-        {showModal
-          ? body.classList.add('overflow-hidden')
-          : body.classList.remove('overflow-hidden')}
         <Searchbar onSubmit={searchImages} />
         <ImageGallery items={items} onClick={openModal} />
+        
         {loading && <Loader />}
+
         {err && <p className={styles.errorMessage}>{err}</p>}
+
         {isImages && page < totalPage && (
           <Button onLoadMore={loadMore} text={'Load more'} />
         )}
-        
+
+        {showModal
+          ? body.classList.add('overflow-hidden')
+          : body.classList.remove('overflow-hidden')}
+
         {showModal && (
           <Modal close={closeModal}>
             <img src={imgDetails.largeImageURL} alt={imgDetails.tags} />
