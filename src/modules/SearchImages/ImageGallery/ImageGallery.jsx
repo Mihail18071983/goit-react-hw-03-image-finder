@@ -1,3 +1,5 @@
+import { PropTypes } from 'prop-types';
+
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 import styles from '../ImageGallery/ImageGallery.module.css';
@@ -22,4 +24,16 @@ export default ImageGallery;
 
 ImageGallery.defaultProps = {
   items: [],
+};
+
+ImageGallery.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id:PropTypes.number.isRequired,
+      webformatURL: PropTypes.string,
+      tags: PropTypes.string,
+      largeImageURL: PropTypes.string,
+    })
+  ).isRequired,
 };

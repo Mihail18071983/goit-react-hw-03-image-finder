@@ -39,7 +39,11 @@ class Searchbar extends Component {
     return (
       <header className={styles.Searchbar}>
         <form className={styles.SearchForm} onSubmit={handleSubmit}>
-          <button type="submit" className={styles.Button}>
+          <button
+            type="submit"
+            className={styles.Button}
+            aria-label="search-button"
+          >
             <span className={styles.Label}>
               <ImSearch />
             </span>
