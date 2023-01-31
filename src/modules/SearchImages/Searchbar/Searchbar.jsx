@@ -19,7 +19,7 @@ class Searchbar extends Component {
     const { search } = this.state;
     e.preventDefault();
     if (search.trim() === '') {
-      return toast('Enter correct search!');
+      return toast.warn('Enter correct search!');
     }
     const { onSubmit } = this.props;
     onSubmit({ ...this.state });

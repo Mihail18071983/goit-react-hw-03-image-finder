@@ -37,7 +37,7 @@ class SearchImages extends Component {
       const { search, page } = this.state;
       const { hits, totalHits } = await fetchImages(search, page);
       if (hits.length === 0) {
-        toast('No result found!');
+        toast.error('No result found!');
       }
       this.setState(({ items }) => ({
         items: [...items, ...hits],
