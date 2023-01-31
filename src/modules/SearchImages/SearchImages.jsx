@@ -6,8 +6,11 @@ import { fetchImages } from 'shared/services/posts-api';
 import Button from 'shared/components/Button/Button';
 import Loader from 'shared/components/Loader/Loader';
 import Modal from 'shared/components/Modal/Modal';
+import { toast } from 'react-toastify';
 
 import styles from '../SearchImages/SearchImages.module.css';
+
+
 
 class SearchImages extends Component {
   state = {
@@ -24,38 +27,44 @@ class SearchImages extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { search, page } = this.state;
     if (prevState.search !== search || prevState.page !== page) {
+      this.setState({ loading: true });
       this.fetchImages();
     }
   }
 
   async fetchImages() {
     try {
-      this.setState({ loading: true });
       const { search, page } = this.state;
       const { hits, totalHits } = await fetchImages(search, page);
+      if (hits.length === 0) {
+        toast('No result found!');
+      }
       this.setState(({ items }) => ({
         items: [...items, ...hits],
         total: totalHits,
       }));
     } catch (err) {
-      this.setState({ err: err.errorMessage });
+      this.setState({ err: err.message });
     } finally {
       this.setState({ loading: false });
     }
   }
 
   searchImages = ({ search }) => {
-    this.setState({ search, items: [], page: 1 });
+    if (search !== this.state.search) {
+      this.setState({ search, items: [], page: 1 });
+    }
+    else toast('you have already entered this query!')
   };
 
   loadMore = () => {
     this.setState(({ page }) => ({ page: page + 1 }));
   };
 
-  openModal = ( largeImageURL, tags ) => {
+  openModal = (largeImageURL, tags) => {
     this.setState({
       showModal: true,
-      imgDetails: { largeImageURL, tags, }
+      imgDetails: { largeImageURL, tags },
     });
   };
 
@@ -67,7 +76,9 @@ class SearchImages extends Component {
   };
 
   render() {
-    const { items, loading, err, total, page, showModal, imgDetails} =
+
+    const body=document.querySelector('body')
+    const { items, loading, err, total, page, showModal, imgDetails } =
       this.state;
     const { searchImages, loadMore, closeModal, openModal } = this;
     const isImages = Boolean(items.length);
@@ -75,6 +86,9 @@ class SearchImages extends Component {
 
     return (
       <div className={styles.search_images}>
+        {showModal
+          ? body.classList.add('overflow-hidden')
+          : body.classList.remove('overflow-hidden')}
         <Searchbar onSubmit={searchImages} />
         <ImageGallery items={items} onClick={openModal} />
         {loading && <Loader />}
@@ -82,6 +96,7 @@ class SearchImages extends Component {
         {isImages && page < totalPage && (
           <Button onLoadMore={loadMore} text={'Load more'} />
         )}
+        
         {showModal && (
           <Modal close={closeModal}>
             <img src={imgDetails.largeImageURL} alt={imgDetails.tags} />

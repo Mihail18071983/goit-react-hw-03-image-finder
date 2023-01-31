@@ -3,7 +3,6 @@
 html {
   box-sizing: border-box;
   width: 100vw;
-  overflow-x: hidden;
 }
 
 *,
@@ -26,4 +25,9 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+
+.overflow-hidden {
+  overflow: hidden;
 }

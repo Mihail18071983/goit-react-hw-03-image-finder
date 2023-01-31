@@ -2,7 +2,6 @@ import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 import styles from '../ImageGallery/ImageGallery.module.css';
 
-
 const ImageGallery = ({ items, onClick }) => {
   return (
     <ul className={styles.ImageGallery}>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
 
-
 import styles from '../Searchbar/searchbar.module.css';
 
 class Searchbar extends Component {
@@ -17,10 +16,10 @@ class Searchbar extends Component {
   };
 
   handleSubmit = e => {
-    const {search}=this.state
+    const { search } = this.state;
     e.preventDefault();
-    if (search.trim() === "") {
-      return toast('Enter correct search!')
+    if (search.trim() === '') {
+      return toast('Enter correct search!');
     }
     const { onSubmit } = this.props;
     onSubmit({ ...this.state });
@@ -41,7 +40,9 @@ class Searchbar extends Component {
       <header className={styles.Searchbar}>
         <form className={styles.SearchForm} onSubmit={handleSubmit}>
           <button type="submit" className={styles.Button}>
-            <span className={styles.Label}><ImSearch/></span>
+            <span className={styles.Label}>
+              <ImSearch />
+            </span>
           </button>
 
           <input

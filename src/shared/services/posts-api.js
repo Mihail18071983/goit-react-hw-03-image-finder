@@ -21,7 +21,7 @@ export const fetchImages = async(q, page = 1)=> {
     return data;
 }
 
-export const fetchAllImg = async()=> {
-    const {data} = await instance.get("/");
-    return data;
-}
+// export const fetchAllImg = async()=> {
+//     const {data} = await instance.get("/");
+//     return data;
+// }

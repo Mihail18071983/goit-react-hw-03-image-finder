@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../Modal/Modal.module.css';
+import { CgClose } from 'react-icons/cg';
 
 
 const modalRoot = document.querySelector('#modal-root');
@@ -27,8 +28,8 @@ class Modal extends Component {
     return createPortal(
       <div className={styles.Overlay} onClick={closeModal}>
         <div className={styles.Modal}>
-          <button type='button' className={styles.close} onClick={close}>
-          X
+          <button type='button' aria-label="close button" className={styles.close} onClick={close}>
+          <CgClose/>
           </button>
           {children}
         </div>
