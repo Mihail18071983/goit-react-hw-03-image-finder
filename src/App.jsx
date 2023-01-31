@@ -9,7 +9,7 @@ export const App = () => {
   return (
     <>
       <SearchImages />
-      <ToastContainer autoClose={2000} theme="colored" />
+      <ToastContainer autoClose={2000} theme="dark" />
     </>
   );
 };
