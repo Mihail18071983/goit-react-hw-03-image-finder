@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
 
-import styles from '../Searchbar/Searchbar.module.css';
+import styles from './Searchbar.module.css';
 
 class Searchbar extends Component {
   state = {
