@@ -20,3 +20,5 @@ export const fetchImages = async(q, page = 1)=> {
     });
     return data;
 }
+
+
